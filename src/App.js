@@ -14,6 +14,7 @@ import NotFound from "./app/components/NotFound";
 import Hero from "./app/components/Hero";
 import FQA from "./app/components/fqa";
 import Login from "./app/components/Login";
+import Signup from "./app/components/Signup";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/fqa" element={<FQA />} />
           <Route path="/notfound" element={<FQA />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           {/* <Route path="/home" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
