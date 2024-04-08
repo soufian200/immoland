@@ -7,14 +7,15 @@ import {
   Link,
   Routes,
 } from "react-router-dom";
-import Home from "./app/components/Home";
-import About from "./app/components/About";
-import Contact from "./app/components/Contact";
-import NotFound from "./app/components/NotFound";
-import Hero from "./app/components/Hero";
-import FQA from "./app/components/fqa";
-import Login from "./app/components/Login";
-import Signup from "./app/components/Signup";
+import Home from "./app/pages/Home";
+import About from "./app/pages/About";
+import Contact from "./app/pages/Contact";
+import Hero from "./app/pages/Hero";
+import FQA from "./app/pages/fqa";
+import Login from "./app/pages/Login";
+import Signup from "./app/pages/Signup";
+import APPROUTES from "./app/utils/APPROUTES";
+import PostDetail from "./app/pages/PostDetail";
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
         </nav> */}
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/home" element={<Home />} />
+          <Route path={APPROUTES.home} element={<Home />} />
+          <Route path={APPROUTES.details + "/:id"} element={<PostDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/fqa" element={<FQA />} />

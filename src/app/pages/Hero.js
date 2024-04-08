@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Hero() {
   return (
@@ -19,7 +19,7 @@ export default function Hero() {
             <div className="mt-10">
               <Link
                 to="/login"
-                className="text-sm font-bold rounded-lg bg-blue-600 px-5 py-4 text-white"
+                className="text-sm font-bold rounded-lg bg-primary px-5 py-4 text-white"
               >
                 Get Started <span aria-hidden="true">&rarr;</span>
               </Link>
