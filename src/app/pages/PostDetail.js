@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { CiClock2, CiLocationOn } from "react-icons/ci";
 import {
@@ -114,12 +114,14 @@ export default function PostDetail() {
             <div className=" pt-4 flex justify-between items-center">
               <div className="flex items-center space-x-2 ">
                 <div className="w-20 h-20 bg-gray-200 rounded-full"></div>
-                <div>
-                  <h3 className="font-medium text-lg">Tom Maddy</h3>
-                  <h4 className="text-blue-500 text-xs font-bold flex items-center">
-                    <BiSolidCheckCircle size={19} /> Verified
-                  </h4>
-                </div>
+                <Link to="/seller/1">
+                  <div>
+                    <h3 className="font-medium text-lg">Tom Maddy</h3>
+                    <h4 className="text-blue-500 text-xs font-bold flex items-center">
+                      <BiSolidCheckCircle size={19} /> Verified
+                    </h4>
+                  </div>
+                </Link>
               </div>
               <div className="bg-red-40 flex space-x-2">
                 <button
