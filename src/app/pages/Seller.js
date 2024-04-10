@@ -1,11 +1,22 @@
-import { BiLogoGmail, BiSolidCheckCircle } from "react-icons/bi";
+import {
+  BiCollection,
+  BiHeart,
+  BiLogoGmail,
+  BiPlus,
+  BiSolidCheckCircle,
+} from "react-icons/bi";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 import { FaPhoneAlt } from "react-icons/fa";
 import Listing from "../components/Listing";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { BsFillExclamationCircleFill } from "react-icons/bs";
+import { useState } from "react";
 
 export default function Seller() {
+  const [tabs, setTabs] = useState(["listings", "favorates"]);
+  const [crrTab, setCrrTab] = useState(tabs[0]);
+  const favorates = [];
   const listings = [
     {
       id: 1,
@@ -81,6 +92,8 @@ export default function Seller() {
     },
   ];
 
+  const listMap = { favorates, listings };
+
   const { id } = useParams();
   return (
     <Layout>
@@ -133,14 +146,46 @@ export default function Seller() {
             </div>
             <div className="bg-red-30 col-span-6">
               <div className="shadow p-4 bg-white">
-                <h1 className="font-bold text-xl mb-4">
-                  Profile's listings {id}
-                </h1>
-                <div className="grid grid-cols-3  gap-x-2 gap-y-7">
-                  {listings.map((item, index) => {
-                    return <Listing item={item} />;
-                  })}
+                <div className="flex  justify-between items-center mb-4">
+                  {/* <h1 className="font-bold text-xl">Profile's listings {id}</h1> */}
+
+                  <div className="flex bg-red-40 space-x-1">
+                    {tabs.map((tab, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCrrTab(tab)}
+                        className={`${
+                          tab !== crrTab ? "bg-gray-100" : "bg-blue-200"
+                        } flex space-x-2 p-3`}
+                      >
+                        <span>
+                          My {tab} ({listMap[tab].length})
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                  <Link to="/create-post">
+                    <div className="bg-primary hover:opacity-90 px-5 text-white font-bold py-2.5 flex">
+                      <BiPlus size={25} />
+                      <span>Create Post</span>
+                    </div>
+                  </Link>
                 </div>
+
+                {listMap[crrTab].length == 0 ? (
+                  <div className=" py-10 flex items-center justify-center">
+                    <div className="text-center flex flex-col text-gray-400 items-center justify-center">
+                      <BsFillExclamationCircleFill size={40} />
+                      <p className="mt-2">No Data yet</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-3  gap-x-2 gap-y-7">
+                    {listMap[crrTab].map((item, index) => (
+                      <Listing item={item} />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
