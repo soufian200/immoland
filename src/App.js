@@ -17,6 +17,7 @@ import Signup from "./app/pages/Signup";
 import APPROUTES from "./app/utils/APPROUTES";
 import PostDetail from "./app/pages/PostDetail";
 import Seller from "./app/pages/Seller";
+import CreatePost from "./app/pages/CreatePost";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/seller/:id" element={<Seller />} />
+          <Route path="/create-post" element={<CreatePost />} />
           {/* <Route path="/home" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />

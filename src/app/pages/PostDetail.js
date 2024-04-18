@@ -17,6 +17,7 @@ import { GrGallery } from "react-icons/gr";
 import { MdOutlineBed } from "react-icons/md";
 import { useState } from "react";
 import { GiBowlingAlley } from "react-icons/gi";
+import Listing from "../components/Listing";
 export default function PostDetail() {
   const { id } = useParams();
 
@@ -26,6 +27,57 @@ export default function PostDetail() {
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
   ]);
   const [crrImg, setCrrImg] = useState(imgs[0]);
+
+  const listings = [
+    {
+      id: 1,
+      title: "House for sale",
+      creationDate: "",
+      city: "Rabat",
+      price: 2500,
+      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
+      rooms: 3,
+      bathrooms: 2,
+      area: 94.76,
+      imageUrl: "/assets/img/house.jpg",
+    },
+    {
+      id: 2,
+      title: "House for sale",
+      creationDate: "",
+      city: "Rabat",
+      price: 2500,
+      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
+      rooms: 3,
+      bathrooms: 2,
+      area: 94.76,
+      imageUrl: "/assets/img/house.jpg",
+    },
+    {
+      id: 3,
+      title: "House for sale",
+      creationDate: "",
+      city: "Rabat",
+      price: 2500,
+      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
+      rooms: 3,
+      bathrooms: 2,
+      area: 94.76,
+      imageUrl: "/assets/img/house.jpg",
+    },
+    {
+      id: 4,
+      title: "House for sale",
+      creationDate: "",
+      city: "Rabat",
+      price: 2500,
+      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
+      rooms: 3,
+      bathrooms: 2,
+      area: 94.76,
+      imageUrl: "/assets/img/house.jpg",
+    },
+  ];
   return (
     <Layout>
       <div className="bg-gray-100">
@@ -230,6 +282,16 @@ export default function PostDetail() {
                     </tr>
                   </tbody>
                 </table>
+              </div>
+
+              {/*  */}
+              <div className="pt-8">
+                <h3 className="font-bold text-xl mb-2">Similar</h3>
+                <div className="grid grid-cols-4 gap-x-3 gap-y-7">
+                  {listings.map((item, index) => {
+                    return <Listing item={item} type={index} />;
+                  })}
+                </div>
               </div>
             </div>
           </div>
