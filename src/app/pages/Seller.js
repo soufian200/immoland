@@ -11,7 +11,11 @@ import { FaPhoneAlt } from "react-icons/fa";
 import Listing from "../components/Listing";
 import { Link, useParams } from "react-router-dom";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Loader from "../components/Loader";
+import Empty from "../components/Empty";
+import profileimg from "../images/profile.png";
 
 export default function Seller() {
   const [tabs, setTabs] = useState(["listings", "favorates"]);
@@ -95,10 +99,36 @@ export default function Seller() {
   const listMap = { favorates, listings };
 
   const { id } = useParams();
+  const userId = id;
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `http://localhost:8000/api/users/${userId}/posts`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setPosts(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch user posts:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [userId]);
+
   return (
     <Layout>
-      {/* search bar */}
-
       <div className="bg-gray-100 pt-2 pb-10 text-gray-700">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-8 gap-3">
@@ -106,9 +136,11 @@ export default function Seller() {
               <div className="shadow p-4 space-y-4 divide-y-2 bg-white ">
                 {/*  */}
                 <div className="flex flex-col items-center space-x-2 ">
-                  <div className="w-28 h-28 bg-gray-200 rounded-full"></div>
+                  <div className="w-28 h-28 bg-gray-200 rounded-full">
+                    <img src={profileimg} alt="" />
+                  </div>
                   <div className="">
-                    <h3 className="font-medium text-lg ">Tom Maddy</h3>
+                    <h3 className="font-medium text-lg ">{user.name}</h3>
                     <h4 className="text-blue-500 text-xs font-bold justify-center flex items-center">
                       <BiSolidCheckCircle size={19} /> Verified
                     </h4>
@@ -134,7 +166,7 @@ export default function Seller() {
                   <div className="">
                     <div className="flex items-center p-2 space-x-2">
                       <BiLogoGmail size={20} />
-                      <span className="font-bold">example@gmail.com</span>
+                      <span className="font-bold">{user.email}</span>
                     </div>
                   </div>
                   {/* <div class="text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-bg-primary/50 font-medium rounded-full text-sm px-6 py-4 text-center space-x-1 inline-flex items-center dark:focus:ring-[#3b5998]/55 ">
@@ -159,7 +191,7 @@ export default function Seller() {
                         } flex space-x-2 p-3`}
                       >
                         <span>
-                          My {tab} ({listMap[tab].length})
+                          My {tab} ({posts.length})
                         </span>
                       </button>
                     ))}
@@ -173,17 +205,21 @@ export default function Seller() {
                 </div>
 
                 {listMap[crrTab].length == 0 ? (
-                  <div className=" py-10 flex items-center justify-center">
-                    <div className="text-center flex flex-col text-gray-400 items-center justify-center">
-                      <BsFillExclamationCircleFill size={40} />
-                      <p className="mt-2">No Data yet</p>
-                    </div>
-                  </div>
+                  <Empty />
                 ) : (
                   <div className="grid grid-cols-3  gap-x-2 gap-y-7">
-                    {listMap[crrTab].map((item, index) => (
+                    {/* {posts.map((item, index) => (
                       <Listing item={item} />
-                    ))}
+                    ))} */}
+                    {loading ? (
+                      <Loader />
+                    ) : posts.length === 0 ? (
+                      <Empty />
+                    ) : (
+                      posts.map((item, index) => (
+                        <Listing index={index} item={item} />
+                      ))
+                    )}
                   </div>
                 )}
               </div>

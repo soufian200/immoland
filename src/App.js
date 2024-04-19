@@ -48,7 +48,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/seller/:id" element={<Seller />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/create-post" Component={withAuth(CreatePost)} />
           {/* <Route path="/home" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />

@@ -10,7 +10,7 @@ export default function Listing({ item }) {
       <div className="">
         <img
           class="  bg-gray-200 mx-auto "
-          src="https://a0.muscache.com/im/pictures/26fab98c-bf20-41cc-88a9-418be5c91527.jpg?im_w=720"
+          src={`http://localhost:8000/storage/${item.image_path}`}
           alt=""
         />
         <div className=" pt-4 flex justify-between ">
@@ -22,14 +22,7 @@ export default function Listing({ item }) {
                 <div className="bg-gray-50  p-1 rounded-full">
                   <BiArea size={23} />
                 </div>
-                <h3 className="">{item.area} m2</h3>
-              </div>
-
-              <div className="flex items-center space-x-2 ">
-                <div className="bg-gray-50  p-1 rounded-full">
-                  <BiBath size={23} />
-                </div>
-                <h3 className="">{item.bathrooms}</h3>
+                <h3 className="">{item.space} m2</h3>
               </div>
 
               <div className="flex items-center space-x-2 ">
@@ -40,7 +33,7 @@ export default function Listing({ item }) {
               </div>
             </div>
 
-            <h1 className=" text-sm text-gray-400">Rabat</h1>
+            <h1 className=" text-sm text-gray-400 capitalize">{item.city}</h1>
             <h1 className=" text-gl text-slate-700 font-bold">
               {item.price} MAD
             </h1>

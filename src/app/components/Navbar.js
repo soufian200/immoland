@@ -18,7 +18,7 @@ export default function Navbar() {
     localStorage.removeItem("user");
 
     // Redirect to the login page
-    navigate.to("/login");
+    navigate("/login");
   };
 
   return (
