@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const navigation = [
     { name: "Home", href: "/" },
@@ -10,6 +10,16 @@ export default function Navbar() {
     { name: "FQA", href: "/fqa" },
   ];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear token and user data from local storage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Redirect to the login page
+    navigate.to("/login");
+  };
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 ">
@@ -98,6 +108,8 @@ export default function Navbar() {
                   </li>
                 ))}
               </div>
+              <button onClick={handleLogout}>Log out</button>
+
               <div className="py-6">
                 <a
                   href="#"

@@ -18,6 +18,7 @@ import APPROUTES from "./app/utils/APPROUTES";
 import PostDetail from "./app/pages/PostDetail";
 import Seller from "./app/pages/Seller";
 import CreatePost from "./app/pages/CreatePost";
+import withAuth from "./app/components/withAuth";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         </nav> */}
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path={APPROUTES.home} element={<Home />} />
+          <Route path={APPROUTES.home} Component={withAuth(Home)} />
           <Route path={APPROUTES.details + "/:id"} element={<PostDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
