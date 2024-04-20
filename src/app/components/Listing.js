@@ -15,7 +15,7 @@ export default function Listing({ item }) {
         />
         <div className=" pt-4 flex justify-between ">
           <div>
-            <h2 className=" text-lg font-semibold">{item.title}</h2>
+            <h2 className="  font-semibold">{item.title}</h2>
 
             <div className="flex space-x-3 my-1 text-gray-400">
               <div className="flex items-center space-x-2">
@@ -33,7 +33,7 @@ export default function Listing({ item }) {
               </div>
             </div>
 
-            <h1 className=" text-sm text-gray-400 capitalize">{item.city}</h1>
+            <h1 className=" text-sm text-gray-600 capitalize">{item.city}</h1>
             <h1 className=" text-gl text-slate-700 font-bold">
               {item.price} MAD
             </h1>

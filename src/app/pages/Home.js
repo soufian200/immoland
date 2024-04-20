@@ -4,6 +4,9 @@ import APPROUTES from "../utils/APPROUTES";
 import { BiArea, BiBath, BiHeart, BiSearch } from "react-icons/bi";
 import { MdOutlineBed } from "react-icons/md";
 import Listing from "../components/Listing";
+import Feed from "./Feed";
+import Loader from "../components/Loader";
+import { useState } from "react";
 
 export default function Home() {
   // dataset
@@ -172,22 +175,8 @@ export default function Home() {
             </div>
           </div>
           <div className=" space-y-3 pb-14 pt-4 shadow p-4 bg-white">
-            <h1 className="font-bold text-2xl text-gray-800">
-              Search Bar here
-            </h1>
-            <div className="grid grid-cols-4 gap-x-3 gap-y-7">
-              {listings.map((item, index) => {
-                return <Listing item={item} />;
-              })}
-              {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i, index) => (
-            <div className="bg-blue-300 ">
-              <img
-                src="https://a0.muscache.com/im/pictures/26fab98c-bf20-41cc-88a9-418be5c91527.jpg?im_w=720"
-                alt="img"
-              />
-            </div>
-          ))} */}
-            </div>
+            <h1 className="font-bold text-2xl text-gray-800">Latest Posts</h1>
+            <Feed />
           </div>
         </div>
       </div>

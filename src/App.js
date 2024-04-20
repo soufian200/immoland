@@ -19,6 +19,7 @@ import PostDetail from "./app/pages/PostDetail";
 import Seller from "./app/pages/Seller";
 import CreatePost from "./app/pages/CreatePost";
 import withAuth from "./app/components/withAuth";
+import Profile from "./app/pages/Profile";
 
 function App() {
   return (
@@ -40,15 +41,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path={APPROUTES.home} Component={withAuth(Home)} />
-          <Route path={APPROUTES.details + "/:id"} element={<PostDetail />} />
+          <Route
+            path={APPROUTES.details + "/:id"}
+            Component={withAuth(PostDetail)}
+          />
+          <Route path="/seller/:id" Component={withAuth(Seller)} />
+          <Route path="/profile" Component={withAuth(Profile)} />
+          <Route path="/create-post" Component={withAuth(CreatePost)} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/fqa" element={<FQA />} />
           <Route path="/notfound" element={<FQA />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/seller/:id" element={<Seller />} />
-          <Route path="/create-post" Component={withAuth(CreatePost)} />
+
           {/* <Route path="/home" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />

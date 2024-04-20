@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ export default function Signup() {
       const response = await axios.post("http://localhost:8000/api/register", {
         name,
         email,
+        phone,
         password,
       });
 
@@ -84,6 +86,24 @@ export default function Signup() {
                   onChange={(e) => setEmail(e.target.value)}
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Telephone
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Telephone"
                   required=""
                 />
               </div>
@@ -158,72 +178,3 @@ export default function Signup() {
     </section>
   );
 }
-
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// function Signup() {
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await axios.post("http://localhost:8000/api/register", {
-//         name,
-//         email,
-//         password,
-//       });
-
-//       // Handle successful signup, e.g., store user data
-//       console.log("Signup successful", response.data);
-//       navigate.to("/home");
-//     } catch (err) {
-//       setError("Failed to sign up");
-//     }
-//   };
-
-//   return (
-//     <div className="bg-red-300">
-//       <h2>Sign Up</h2>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label>Name:</label>
-//           <input
-//             type="text"
-//             value={name}
-//             onChange={(e) => setName(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label>Email:</label>
-//           <input
-//             type="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label>Password:</label>
-//           <input
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <button type="submit">Sign Up</button>
-//       </form>
-//       {error && <p style={{ color: "red" }}>{error}</p>}
-//     </div>
-//   );
-// }
-
-// export default Signup;

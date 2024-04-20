@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { CiClock2, CiLocationOn } from "react-icons/ci";
 import { BiSolidCheckCircle } from "react-icons/bi";
@@ -15,66 +15,30 @@ export default function PostDetail() {
   const user = JSON.parse(localStorage.getItem("user"));
   const { id } = useParams();
   const postId = id;
-
-  const [imgs, setImgs] = useState([
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
-  ]);
-  const [crrImg, setCrrImg] = useState(imgs[0]);
-
-  const listings = [
-    {
-      id: 1,
-      title: "House for sale",
-      creationDate: "",
-      city: "Rabat",
-      price: 2500,
-      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
-      rooms: 3,
-      bathrooms: 2,
-      area: 94.76,
-      imageUrl: "/assets/img/house.jpg",
-    },
-    {
-      id: 2,
-      title: "House for sale",
-      creationDate: "",
-      city: "Rabat",
-      price: 2500,
-      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
-      rooms: 3,
-      bathrooms: 2,
-      area: 94.76,
-      imageUrl: "/assets/img/house.jpg",
-    },
-    {
-      id: 3,
-      title: "House for sale",
-      creationDate: "",
-      city: "Rabat",
-      price: 2500,
-      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
-      rooms: 3,
-      bathrooms: 2,
-      area: 94.76,
-      imageUrl: "/assets/img/house.jpg",
-    },
-    {
-      id: 4,
-      title: "House for sale",
-      creationDate: "",
-      city: "Rabat",
-      price: 2500,
-      description: `This house is located in the heart of Rabat. It has a living room with sofa and TV, a kitchenette`,
-      rooms: 3,
-      bathrooms: 2,
-      area: 94.76,
-      imageUrl: "/assets/img/house.jpg",
-    },
-  ];
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const [error2, setError2] = useState(null);
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      setDeleteLoading(true);
+      await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      // Handle success (e.g., update UI)
+      console.log("Post deleted successfully");
+      navigate(-1);
+    } catch (error) {
+      setError2("Failed to delete post");
+      console.error("Error deleting post:", error);
+      setDeleteLoading(false);
+    }
+  };
 
   useEffect(() => {
     // Fetch the details of the post by ID
@@ -128,16 +92,16 @@ export default function PostDetail() {
             </div>
           </div> */}
 
-          <div className="shadow-lg p-4  space-y-3 divide-y bg-white">
+          <div className="shadow-lg p-4  space-y-3  bg-white">
             {!post ? (
               <Loader />
             ) : (
-              <div>
-                <div className="space-y-2 ">
+              <div className="">
+                <div className="space-y-2 border-b pb-2 mb-2 ">
                   <div className="flex justify-between mt-3">
                     <h1 className="font-bold text-2xl">{post.title}</h1>
                     <h2 className="text-3xl font-bold text-primary">
-                      {post.price}MAD
+                      MAD{post.price}
                     </h2>
                   </div>
                   <div className="flex space-x-3 text-gray-400">
@@ -153,16 +117,13 @@ export default function PostDetail() {
                 </div>
 
                 {/*  */}
-                <div class="grid grid-cols-8 grid-row-4 gap-2 ">
-                  <div className="bg-red-300 col-span-4 row-span-2 relative">
+                <div class="grid grid-cols-8 grid-row-4 gap-2  ">
+                  <div className="bg-red-30 col-span-4 row-span-2 relative">
                     <img
                       src={`http://localhost:8000/storage/${post.image_path}`}
                       alt={post.title}
                     />
-                    {/* <img
-                  src="https://a0.muscache.com/im/pictures/a11da12e-fcec-4115-827b-019043a04c25.jpg?im_w=1200"
-                  alt="img"
-                /> */}
+
                     <button className="absolute bottom-2 flex space-x-2 right-2 bg-white hover:bg-gray-100 text-black px-4 py-2 rounded-full">
                       <GrGallery />
                       <span className="font-bold text-xs">See All Photos</span>
@@ -195,14 +156,16 @@ export default function PostDetail() {
                 </div>
 
                 {/*  */}
-                <div className=" pt-4 flex justify-between items-center">
+                <div className=" pt-4 flex justify-between items-center border-b pb-2 mb-2">
                   <div className="flex items-center space-x-2 ">
                     <div className="w-20 h-20 bg-gray-200 rounded-full">
                       <img src={profileimg} alt="" />
                     </div>
-                    <Link to="/seller/1">
+                    <Link to={`/seller/${post.user.id}`}>
                       <div>
-                        <h3 className="font-medium text-lg">{user.name}</h3>
+                        <h3 className="font-medium text-lg">
+                          {post.user.name}
+                        </h3>
                         <h4 className="text-blue-500 text-xs font-bold flex items-center">
                           <BiSolidCheckCircle size={19} /> Verified
                         </h4>
@@ -322,6 +285,23 @@ export default function PostDetail() {
                     </div>
                   </div> */}
                 </div>
+
+                {/*  */}
+                {post.user.id === user.id && (
+                  <div className="bg-red-40 mt-3">
+                    {deleteLoading ? (
+                      <Loader />
+                    ) : (
+                      <button
+                        onClick={handleDelete}
+                        class="w-full bg-red-500 text-white py-3"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                )}
+                {error2 && <p className="bg-red-500">{error2}</p>}
               </div>
             )}
           </div>

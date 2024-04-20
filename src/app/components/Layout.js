@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import profileimg from "../images/profile.png";
+import { BiLogOut } from "react-icons/bi";
 export default function Layout({ children }) {
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear token and user data from local storage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Redirect to the login page
+    navigate("/login");
+  };
 
   return (
     <div>
@@ -12,14 +23,22 @@ export default function Layout({ children }) {
             <Link to={`/home`}>
               <h2 className="font-bold">LOGO</h2>
             </Link>
-            <Link to={"/seller/" + user.id}>
-              <div className="flex justify-center space-x-2 items-center">
-                <div className="w-12 h-12 bg-gray-100 rounded-full">
-                  <img src={profileimg} alt="" />
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={handleLogout}
+                className="bg-gray-200 hover:bg-gray-300 h-10 flex items-center justify-center w-10 rounded-full"
+              >
+                <BiLogOut size={20} />
+              </button>
+              <Link to={"/profile"}>
+                <div className="flex justify-center space-x-2 items-center">
+                  <div className="w-12 h-12 bg-gray-100 rounded-full">
+                    <img src={profileimg} alt="" />
+                  </div>
+                  <h2 className="font-bold">{user.name}</h2>
                 </div>
-                <h2 className="font-bold">{user.name}</h2>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

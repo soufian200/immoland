@@ -43,7 +43,7 @@ function CreatePost() {
       );
 
       console.log("Post created:", response.data);
-      navigate(-1);
+      navigate("/posts/" + response.data.id);
       setLoading(false);
       // Handle successful post creation (e.g., notify the user, redirect, etc.)
     } catch (error) {
