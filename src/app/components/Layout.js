@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import profileimg from "../images/profile.png";
 import { BiLogOut } from "react-icons/bi";
+import logo from "../images/logo.png";
 export default function Layout({ children }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Layout({ children }) {
         <div className="container mx-auto px-4">
           <div className=" px-10 flex justify-between items-center h-16">
             <Link to={`/home`}>
-              <h2 className="font-bold">LOGO</h2>
+              <img src={logo} alt="" width={150} />
             </Link>
             <div className="flex items-center space-x-3">
               <button

@@ -120,7 +120,11 @@ export default function PostDetail() {
                 <div class="grid grid-cols-8 grid-row-4 gap-2  ">
                   <div className="bg-red-30 col-span-4 row-span-2 relative">
                     <img
-                      src={`http://localhost:8000/storage/${post.image_path}`}
+                      src={
+                        post.image_path.includes("https://")
+                          ? post.image_path
+                          : "http://localhost:8000/storage/" + post.image_path
+                      }
                       alt={post.title}
                     />
 

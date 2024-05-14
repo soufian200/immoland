@@ -10,7 +10,11 @@ export default function Listing({ item }) {
       <div className="">
         <img
           class="  bg-gray-200 mx-auto "
-          src={`http://localhost:8000/storage/${item.image_path}`}
+          src={
+            item.image_path.includes("https://")
+              ? item.image_path
+              : "http://localhost:8000/storage/" + item.image_path
+          }
           alt=""
         />
         <div className=" pt-4 flex justify-between ">
