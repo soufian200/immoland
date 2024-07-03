@@ -1,4 +1,4 @@
-![My Image](https://github.com/soufian200/immoland/blob/master/public/login%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/home%20page.png)
 ![My Image](https://github.com/soufian200/immoland/blob/master/public/login%20page.png)
 ![My Image](https://github.com/soufian200/immoland/blob/master/public/postdetail%20page.png)
 ![My Image](https://github.com/soufian200/immoland/blob/master/public/myposts%20page.png)
