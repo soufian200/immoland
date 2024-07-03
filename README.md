@@ -1,1 +1,7 @@
-![My Image](https://github.com/soufian200/immoland/blob/master/public/createpost%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/login%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/login%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/postdetail%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/myposts%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/profile%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/search%20page.png)
+![My Image](https://github.com/soufian200/immoland/blob/master/public/feed%20page.png)
